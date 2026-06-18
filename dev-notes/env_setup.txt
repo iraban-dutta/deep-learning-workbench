@@ -1,0 +1,140 @@
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+#0: Python Versions
+======== XX ======== || ======== XX ======== || ======== XX ========
+>python --version
+Python 3.12.4
+>python3 --version
+Python 3.13.3
+
+>which python
+/Users/irabandutta/opt/anaconda3/bin/python
+>which python3
+/opt/homebrew/bin/python3
+
+Notes:
+
+N1. Conda can create environments with a specific Python version even if that version is not installed on the system. 
+For example, 
+conda create --prefix ./venv python=3.12 will automatically download and install Python 3.12 inside the environment.
+
+N2. Python venv cannot download Python versions. The desired Python interpreter must already be installed on the machine. 
+For example, 
+python3.12 -m venv venv requires Python 3.12 to be installed beforehand.
+
+N3. Multiple Python installations can coexist on the same machine. 
+Use which python and which python3 to identify which interpreter is being used.
+
+
+
+
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+#1: Using CONDA
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+-------- XX -------- || -------- XX --------
+#1.1:Create conda Environment:
+-------- XX -------- || -------- XX --------
+
+# Path Based Env: 
+conda create --prefix ./venv python=3.12
+# Global Env: 
+conda create --name myenv python=3.12
+
+-------- XX -------- || -------- XX --------
+
+# Path Based Env using YAML file (name should be commented out in yaml file): 
+conda env create --prefix ./venv -f torch-conda.yml
+
+# Global Env using YAML file (name should be present in yaml file): 
+conda env create -f /path/to/torch-conda.yml
+
+
+-------- XX -------- || -------- XX --------
+#1.2:Activate and De-Activate conda Environment:
+-------- XX -------- || -------- XX --------
+
+# Show all conda envs:
+conda env list
+OR
+conda info --envs
+
+# De-Activate path based env:
+conda deactivate
+
+# Activate path based env:
+conda activate ./venv
+
+# Activate global env:
+conda activate <global_env_name>
+
+
+-------- XX -------- || -------- XX --------
+#1.3:Remove conda Environment:
+-------- XX -------- || -------- XX --------
+
+# Remove path-based env
+conda env remove -p ./venv
+
+# Remove global env
+conda env remove -n myenv
+
+
+-------- XX -------- || -------- XX --------
+#1.4:Export conda Environment:
+-------- XX -------- || -------- XX --------
+
+# Export path-based env
+conda env export --prefix ./venv > environment.yml
+
+# Export global env
+conda env export --name myenv > environment.yml
+
+
+
+
+
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+#2: NOT using CONDA
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+-------- XX -------- || -------- XX --------
+#2.1: Create Environment:
+-------- XX -------- || -------- XX --------
+
+# Create using default python
+python -m venv venv
+
+# Create using python3
+python3 -m venv venv
+
+# Create using specific Python version
+python3.12 -m venv venv
+
+# Alternative (absolute path to interpreter)
+/usr/local/bin/python3.12 -m venv venv
+
+
+
+-------- XX -------- || -------- XX --------
+#2.2:Activate and De-Activate Environment:
+-------- XX -------- || -------- XX --------
+# Activate
+source venv/bin/activate
+
+# Deactivate
+deactivate
+
+
+-------- XX -------- || -------- XX --------
+#2.3:Remove Environment:
+-------- XX -------- || -------- XX --------
+rm -rf venv
+
+
+-------- XX -------- || -------- XX --------
+#2.4:Export Environment:
+-------- XX -------- || -------- XX --------
+pip freeze > requirements.txt

@@ -1,0 +1,525 @@
+======== XX ======== || ======== XX ======== || ======== XX ========
+# 0: Git Configuration
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+# Check git version
+git --version
+
+# Check username
+git config --global user.name
+
+# Check email
+git config --global user.email
+
+# Set username
+git config --global user.name "Your Name"
+
+# Set email
+git config --global user.email "your_email@gmail.com"
+
+# View all config
+git config --list
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+# 1: Repository Creation & Linking
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+-------- XX -------- || -------- XX --------
+# 1.1: Local Repo Exists, Remote Repo Does Not Exist Yet
+-------- XX -------- || -------- XX --------
+
+# Create local repository
+git init
+
+# First commit
+git add .
+git commit -m "Initial commit"
+
+# Create repository on GitHub
+
+# Link local and remote
+git remote add origin <REMOTE_URL>
+
+# Verify remote
+git remote -v
+
+# Push
+git push -u origin main
+
+-------- XX -------- || -------- XX --------
+# 1.2: Remote Repo Exists, Local Repo Does Not Exist
+-------- XX -------- || -------- XX --------
+
+git clone <REMOTE_URL>
+
+cd <REPO_NAME>
+
+-------- XX -------- || -------- XX --------
+# 1.3: Local Repo Exists, Remote Repo Exists
+-------- XX -------- || -------- XX --------
+
+git remote add origin <REMOTE_URL>
+
+git remote -v
+
+git push -u origin main
+
+Prerequisite:
+Local repository must contain at least one commit.
+
+NOTE on -u flag:
+-u flag in above command: git push -u origin main
+Push to origin/main and remember this relationship for future pushes and pulls.
+
+With -u
+1st Time: git push -u origin main
+2nd Time Onwards: git push OR git pull
+
+Without -u
+Every Time: git push origin main OR git pull origin main
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+# 2: Daily Workflow
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+# Check status
+git status
+
+# Stage all files
+git add .
+
+# Stage specific file
+git add file.py
+
+# Commit
+git commit -m "Meaningful commit message"
+
+# Push
+git push
+
+# Pull latest changes
+git pull
+
+# Check differences
+git diff
+
+# Show only staged changes
+git diff --staged
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+# 3: Branch Operations
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+# View Local branches
+git branch
+
+# View Local + Remote branches
+git branch -a
+
+# Create branch
+git branch feature-1
+
+# Switch branch
+git checkout feature-1
+
+# Create and switch
+git checkout -b feature-1
+
+# Modern equivalent
+git switch -c feature-1
+
+# Switch back to main
+git checkout main
+
+# Delete branch
+git branch -d feature-1
+
+# Push branch
+git push origin feature-1
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+# 4: Remote Operations
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+# Show remotes
+git remote -v
+
+# Add remote
+git remote add origin <REMOTE_URL>
+
+# Change remote URL
+git remote set-url origin <NEW_URL>
+
+# Remove remote
+git remote remove origin
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+# 5: Stashing
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+# Save current uncommitted changes
+git stash
+
+# Save with message
+git stash push -m "WIP transformer implementation"
+
+# List stashes
+git stash list
+
+# Apply latest stash
+git stash apply
+
+# Apply and remove stash
+git stash pop
+
+# Delete stash
+git stash drop stash@{0}
+
+# Delete all stashes
+git stash clear
+
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+# 6: Undo Operations
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+-------- XX -------- || -------- XX --------
+# 6.1: Unstage Files
+-------- XX -------- || -------- XX --------
+git restore --staged file.py
+
+-------- XX -------- || -------- XX --------
+# 6.2: Discard Local Changes
+-------- XX -------- || -------- XX --------
+git restore file.py
+
+-------- XX -------- || -------- XX --------
+# 6.3: Undo Last Commit
+-------- XX -------- || -------- XX --------
+
+# Keep changes
+git reset --soft HEAD~1
+
+# Remove changes
+git reset --hard HEAD~1
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+# 7: History & Time Travel
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+# Full history
+git log
+
+# Compact history
+git log --oneline
+
+# Graph view
+git log --oneline --graph --all
+
+-------- XX -------- || -------- XX --------
+# 7.1: Checkout Older Commit
+-------- XX -------- || -------- XX --------
+git checkout <COMMIT_HASH>
+
+Note:
+You are now in Detached HEAD state.
+
+-------- XX -------- || -------- XX --------
+# 7.2: Create Branch From Older Commit
+-------- XX -------- || -------- XX --------
+git checkout -b bugfix-branch <COMMIT_HASH>
+
+-------- XX -------- || -------- XX --------
+# 7.3: Permanently Move Back To Older Commit
+-------- XX -------- || -------- XX --------
+# WARNING:
+# Deletes all commits after target commit
+git reset --hard <COMMIT_HASH>
+
+-------- XX -------- || -------- XX --------
+# 7.4: Revert Specific Commit
+-------- XX -------- || -------- XX --------
+# Creates a new commit that reverses changes
+git revert <COMMIT_HASH>
+
+-------- XX -------- || -------- XX --------
+# 7.5: Recovery history
+-------- XX -------- || -------- XX --------
+git reflog
+
+
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+# 8: Useful Files
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+.gitignore
+
+Typical Python Project:
+
+venv/
+.env/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.DS_Store
+
+======== XX ======== || ======== XX ======== || ======== XX ========
+# 9: Notes
+======== XX ======== || ======== XX ======== || ======== XX ========
+
+
+-------- XX -------- || -------- XX --------
+# 9.1: Notes: Generic 
+-------- XX -------- || -------- XX --------
+
+N1. git init creates a local repository.
+
+N2. git clone creates a local repository and automatically links it to the remote repository.
+
+N3. GitHub repositories must exist before code can be pushed to them.
+
+N4. git push -u origin main sets origin/main as the default upstream branch.
+
+N5. Always create a .gitignore before the first commit.
+
+N6. git stash is useful when switching branches without committing unfinished work.
+
+N7. git reset rewrites history. Use carefully.
+
+N8. git revert is safer for shared repositories because history is preserved.
+
+
+-------- XX -------- || -------- XX --------
+# 9.2: Notes: Stashing
+-------- XX -------- || -------- XX --------
+
+S1. Stash temporarily saves uncommitted changes without creating a commit.
+
+Example:
+
+Current branch: feature-transformer
+Modified files:
+attention.py
+encoder.py
+
+Need to urgently switch to main branch and fix a bug.
+
+Without stash:
+Git may prevent branch switch due to uncommitted changes.
+
+Use:
+git stash
+git checkout main
+
+After bug fix:
+git checkout feature-transformer
+git stash pop
+
+S2. git stash apply vs git stash pop
+
+git stash apply
+-> Restores stash
+-> Keeps stash entry
+
+git stash pop
+-> Restores stash
+-> Removes stash entry
+
+Example:
+
+git stash push -m "half-complete attention layer"
+git stash apply
+
+Result:
+Changes restored
+Stash still available
+
+git stash pop
+
+Result:
+Changes restored
+Stash deleted
+
+Note:
+If conflicts occur during git stash pop,
+the stash entry may be retained until conflicts are resolved.
+
+S3. Use stash for:
+- Branch switching
+- Quick experiments
+- Temporary work-in-progress
+
+Avoid stash for:
+- Long-term storage
+- Important backups
+
+Create commits instead.
+
+S4. View stash contents
+
+git stash show
+
+Detailed diff:
+git stash show -p stash@{0}
+
+
+-------- XX -------- || -------- XX --------
+# 9.3: Notes: Undo Operations
+-------- XX -------- || -------- XX --------
+
+U1. git restore --staged file.py
+
+Purpose:
+Remove file from staging area.
+
+Example:
+git add model.py
+Oops.
+git restore --staged model.py
+
+Result:
+model.py remains modified
+model.py is no longer staged
+
+U2. git restore file.py
+
+Purpose:
+Discard uncommitted local changes.
+
+Example:
+
+Modified:
+model.py
+
+Want original version from last commit.
+git restore model.py
+
+Result:
+Local changes since the last commit are lost.
+
+U3. git reset --soft HEAD~1
+
+Purpose:
+Undo last commit but keep all code changes.
+
+Example:
+
+git commit -m "wrong message"
+git reset --soft HEAD~1
+
+Result:
+Commit removed
+Changes remain staged
+
+Useful when:
+- Wrong commit message
+- Forgot files in commit
+
+U4. git reset --hard HEAD~1
+
+Purpose:
+Undo last commit and delete all associated changes.
+
+Example:
+
+git reset --hard HEAD~1
+
+Result:
+Commit removed
+Code changes removed
+
+WARNING:
+Data loss possible.
+
+U5. git reset --hard <COMMIT_HASH>
+
+Purpose:
+Move repository back to an older commit.
+
+Example:
+
+History:
+A -> B -> C -> D
+
+Current:
+D
+
+Run:
+Assume B has hash abc123
+git reset --hard abc123
+
+Result:
+A -> B
+
+Commits C and D disappear from current branch.
+
+WARNING:
+Use carefully on shared branches.
+
+U6. git revert <COMMIT_HASH>
+
+Purpose:
+Safely undo an older commit.
+
+Example:
+
+History:
+A -> B -> C -> D
+
+Need to undo C.
+Run:
+
+Assume C has hash xyz789
+git revert xyz789
+
+Result:
+A -> B -> C -> D -> E
+
+Where:
+E reverses changes introduced by C.
+
+Advantage:
+History preserved.
+Safe for shared repositories.
+
+U7. Difference: reset vs revert
+
+git reset
+Rewrites history
+Removes commits
+Dangerous on shared branches
+
+git revert
+Preserves history
+Adds new commit
+Safe on shared branches
+
+
+U8. git reflog
+
+Purpose:
+View historical HEAD positions.
+
+Useful when:
+- Accidentally used git reset --hard
+- Lost a commit
+- Need to recover previous state
+
+Example:
+
+git reflog
+
+Output:
+abc123 HEAD@{0}: reset: moving to HEAD~1
+def456 HEAD@{1}: commit: Added attention layer
+
+Recover:
+
+git reset --hard def456
+
+Result:
+Lost commit restored.
+
+Note:
+git reflog is local to your machine and can often recover commits that no longer appear in git log.
