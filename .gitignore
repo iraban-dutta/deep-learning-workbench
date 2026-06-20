@@ -1,6 +1,7 @@
 # Self Added
 .project_init/
 .DS_Store
+99_dsa/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
